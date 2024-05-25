@@ -33,10 +33,9 @@ public class Msg : BasePlugin, IPluginConfig<Helper>
         Config = config;
     }
 
-
     //Public !msg usage
     [ConsoleCommand("css_msg")]
-    [CommandHelper(2, "Využití, /msg <příjemce> + <zpráva>")]
+    [CommandHelper(2, "Usage, /msg <target> + <message>")]
     public void OnPublicMSG(CCSPlayerController? caller, CCSPlayerController? admin, CommandInfo command, CommandInfo command2)
     {
         var callerName = caller == null ? "Console" : caller.PlayerName;
@@ -53,10 +52,10 @@ public class Msg : BasePlugin, IPluginConfig<Helper>
 
         playersToTarget.ForEach(player =>
         {
-            player.PrintToChat($" {ChatColors.Green}[{ChatColors.White}{callerName} {ChatColors.Green}-> {ChatColors.White}já{ChatColors.Green}] {ChatColors.Yellow}{utf8String}".ReplaceColorTags());
+            player.PrintToChat($" {ChatColors.Green}[{ChatColors.White}{callerName} {ChatColors.Green}-> {ChatColors.White}me{ChatColors.Green}] {ChatColors.Yellow}{utf8String}".ReplaceColorTags());
         });
 
-        command.ReplyToCommand($" {ChatColors.Green}[{ChatColors.White}já {ChatColors.Green}-> {ChatColors.White}{command.GetArg(1)}{ChatColors.Green}] {ChatColors.Yellow}{utf8String}".ReplaceColorTags());
+        command.ReplyToCommand($" {ChatColors.Green}[{ChatColors.White}me {ChatColors.Green}-> {ChatColors.White}{command.GetArg(1)}{ChatColors.Green}] {ChatColors.Yellow}{utf8String}".ReplaceColorTags());
 
         if (admin == null || !admin.IsValid || command2.GetCommandString[command2.GetCommandString.IndexOf(' ')..].Length == 0) return;
 
@@ -75,7 +74,7 @@ public class Msg : BasePlugin, IPluginConfig<Helper>
 
         if (!matches.Any())
         {
-            command.ReplyToCommand($"Hráč {command.GetArg(1)} nebyl nalezen.");
+            command.ReplyToCommand($"Player {command.GetArg(1)} doesn't exit.");
             return null;
         }
 
@@ -85,7 +84,7 @@ public class Msg : BasePlugin, IPluginConfig<Helper>
         if (matches.Count() == 1)
             return matches;
 
-        command.ReplyToCommand($"Více hráčů nalezeno: \"{command.GetArg(1)}\".");
+        command.ReplyToCommand($"More players found: \"{command.GetArg(1)}\".");
         return null;
     }
 }
