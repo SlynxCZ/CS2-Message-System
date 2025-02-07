@@ -23,7 +23,7 @@ namespace Message;
 public class Msg : BasePlugin, IPluginConfig<Helper>
 {
     public override string ModuleName => "Message";
-    public override string ModuleAuthor => "The Slynx";
+    public override string ModuleAuthor => "Slynx";
     public override string ModuleDescription => "Message System with logging messages for ADMINS";
     public override string ModuleVersion => "1.1";
     public required Helper Config { get; set; }
